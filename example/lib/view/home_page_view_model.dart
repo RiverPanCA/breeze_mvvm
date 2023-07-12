@@ -1,4 +1,4 @@
-import 'package:simple_mvvm/infrastructure/base/base_screen_view_model.dart';
+import 'package:simple_mvvm/simple_mvvm.dart';
 
 class HomePageViewModel extends BaseScreenViewModel {
   int _counter = 0;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../util/screen_scale_mixin.dart';
 import 'base_screen_view_model.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +18,7 @@ class BaseScreenStatefulWidget extends StatefulWidget {
 }
 
 class BaseState<C extends BaseScreenViewModel,
-    T extends BaseScreenStatefulWidget> extends State<T> with AppScaleMixin {
+    T extends BaseScreenStatefulWidget> extends State<T>  {
   C get viewModel => widget.viewModel as C;
 
   // Default implementation is nec. since abstract class cannot be instantiated

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:simple_mvvm/home_page.dart';
-import 'package:simple_mvvm/home_page_view_model.dart';
 
+import '../view/home_page.dart';
+import '../view/home_page_view_model.dart';
 import 'nav_route.dart';
 
 class ScreenNavigation {

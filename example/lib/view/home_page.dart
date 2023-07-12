@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_mvvm/infrastructure/base/base_screen_stateful_widget.dart';
+import 'package:simple_mvvm/simple_mvvm.dart';
 
 import 'home_page_view_model.dart';
 
