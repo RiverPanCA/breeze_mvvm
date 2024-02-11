@@ -10,6 +10,10 @@
 .svn/
 migrate_working_dir/
 
+# However, if you are working on a library package, then you should not check in the lockfile.
+# https://stackoverflow.com/questions/16136739/in-dart-and-pub-should-i-add-pubspec-lock-to-my-gitignore
+pubspec.lock
+
 # IntelliJ related
 *.iml
 *.ipr
