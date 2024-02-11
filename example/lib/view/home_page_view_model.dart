@@ -1,4 +1,4 @@
-import 'package:simple_mvvm/simple_mvvm.dart';
+import 'package:breeze_mvvm/breeze_mvvm.dart';
 
 class HomePageViewModel extends BaseScreenViewModel {
   int _counter = 0;
