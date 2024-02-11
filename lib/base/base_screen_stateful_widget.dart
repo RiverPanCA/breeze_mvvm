@@ -1,3 +1,4 @@
+import 'package:breeze_mvvm/util/alert_util.dart';
 import 'package:flutter/material.dart';
 
 import 'base_screen_view_model.dart';
@@ -5,9 +6,9 @@ import 'base_screen_view_model.dart';
 // ignore: must_be_immutable
 class BaseScreenStatefulWidget extends StatefulWidget {
   BaseScreenStatefulWidget(
-    this.viewModel, {
-    Key? key,
-  }) : super(key: key);
+      this.viewModel, {
+        Key? key,
+      }) : super(key: key);
 
   BaseScreenViewModel viewModel;
 
@@ -18,8 +19,20 @@ class BaseScreenStatefulWidget extends StatefulWidget {
 }
 
 class BaseState<C extends BaseScreenViewModel,
-    T extends BaseScreenStatefulWidget> extends State<T>  {
+T extends BaseScreenStatefulWidget> extends State<T> {
   C get viewModel => widget.viewModel as C;
+
+  void toast(String message) {
+    AlertUtil(context).showToastTopShort(message);
+  }
+
+  Map<dynamic, dynamic> get arguments {
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+
+    final map = arguments != null ? arguments as Map : {};
+
+    return map;
+  }
 
   // Default implementation is nec. since abstract class cannot be instantiated
   @override
@@ -55,63 +68,63 @@ class BaseState<C extends BaseScreenViewModel,
     setState(() {});
   }
 
-      void showSnackBar(
-        String message, {
+  void showSnackBar(
+      String message, {
         bool isSuccess = true,
         Color? color,
       }) {
-        final backgroundColor =
-            color ?? (isSuccess ? Colors.green[600] : Colors.red[600]);
+    final backgroundColor =
+        color ?? (isSuccess ? Colors.green[600] : Colors.red[600]);
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: backgroundColor,
-            content: Text(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: backgroundColor,
+        content: Text(
+          message,
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showTopSnackBar(
+      String message, {
+        bool isSuccess = true,
+        Color? color,
+        Duration? duration,
+      }) {
+    final backgroundColor =
+        color ?? (isSuccess ? Colors.green[600] : Colors.red[600]);
+
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: duration ?? const Duration(milliseconds: 500),
+        backgroundColor: Colors.transparent,
+        content: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            height: 100,
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
+            child: Text(
               message,
               style: const TextStyle(
                 fontSize: 20,
               ),
             ),
           ),
-        );
-      }
-
-    void showTopSnackBar(
-      String message, {
-      bool isSuccess = true,
-      Color? color,
-      Duration? duration,
-    }) {
-      final backgroundColor =
-          color ?? (isSuccess ? Colors.green[600] : Colors.red[600]);
-
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: duration ?? const Duration(milliseconds: 500),
-          backgroundColor: Colors.transparent,
-          content: Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              height: 100,
-              margin: const EdgeInsets.all(20),
-              padding: const EdgeInsets.all(20),
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: Text(
-                message,
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ),
         ),
-      );
-    }
+      ),
+    );
+  }
 }

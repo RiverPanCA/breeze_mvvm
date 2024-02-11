@@ -5,5 +5,6 @@ class BaseModel {
     }
   }
 
+  /// Firebase Firestore
   String docId = 'NotSet';
 }
